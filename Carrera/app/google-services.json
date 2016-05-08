@@ -1,0 +1,113 @@
+{
+  "project_info": {
+    "project_number": "125957061171",
+    "project_id": "gcmprueba-7c19f"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125957061171:android:ee06f513e1488400",
+        "android_client_info": {
+          "package_name": "itcr.ac.cr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW8rb_kfz_wuNEo0S6zeEhtnU024N_9uQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125957061171:android:a0ac0da079edf735",
+        "android_client_info": {
+          "package_name": "cr.ac.itcr.gcm3_0"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW8rb_kfz_wuNEo0S6zeEhtnU024N_9uQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125957061171:android:66ecce2233c7b16c",
+        "android_client_info": {
+          "package_name": "info.androidhive.gcm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW8rb_kfz_wuNEo0S6zeEhtnU024N_9uQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125957061171:android:d106f57593ce9255",
+        "android_client_info": {
+          "package_name": "cr.ac.itcr.carrera"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW8rb_kfz_wuNEo0S6zeEhtnU024N_9uQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
