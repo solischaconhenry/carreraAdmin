@@ -66,7 +66,7 @@
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner3"
+                    android:id="@+id/spTEveAgreg"
                     android:layout_gravity="center_horizontal" />
 
             </LinearLayout>
@@ -91,7 +91,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText3"
+                    android:id="@+id/etNombreEveAgregar"
                     android:textIsSelectable="false"
                     android:textSize="18dp" />
             </LinearLayout>
@@ -117,7 +117,7 @@
                     android:layout_height="92dp"
                     android:inputType="textMultiLine"
                     android:ems="10"
-                    android:id="@+id/editText2"
+                    android:id="@+id/etDetallesEveAgreg"
                     android:textColor="@color/colorPrimaryDark"
                     android:textIsSelectable="false"
                     android:textSize="18dp" />
@@ -133,7 +133,7 @@
                     android:layout_width="320dp"
                     android:layout_height="61dp"
                     android:text="Agregar"
-                    android:id="@+id/button"
+                    android:id="@+id/btnEvenAgreg"
                     android:layout_gravity="center"
                     android:theme="@style/AlertDialog.AppCompat"
                     android:background="@color/btn_Form" />

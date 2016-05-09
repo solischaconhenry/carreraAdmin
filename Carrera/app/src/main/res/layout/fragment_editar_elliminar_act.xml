@@ -64,7 +64,7 @@
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner2"
+                    android:id="@+id/spIDEvenEdit"
                     android:layout_gravity="center_horizontal" />
 
             </LinearLayout>
@@ -89,7 +89,7 @@
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner"
+                    android:id="@+id/spTEvenEditar"
                     android:layout_gravity="center_horizontal" />
 
             </LinearLayout>
@@ -114,7 +114,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText3"
+                    android:id="@+id/etNombreEvenEditar"
                     android:textSize="18dp" />
             </LinearLayout>
 
@@ -139,7 +139,7 @@
                     android:layout_height="match_parent"
                     android:inputType="textMultiLine"
                     android:ems="10"
-                    android:id="@+id/editText2"
+                    android:id="@+id/etDetallesEvenEditar"
                     android:textSize="18dp" />
             </LinearLayout>
 
@@ -157,7 +157,7 @@
                     android:layout_width="140dp"
                     android:layout_height="55dp"
                     android:text="Editar"
-                    android:id="@+id/button"
+                    android:id="@+id/btnEditarEvenEditar"
                     android:layout_gravity="center"
                     android:layout_weight="0.39"
                     android:background="@color/btn_Form" />
@@ -171,7 +171,7 @@
                     android:layout_width="140dp"
                     android:layout_height="55dp"
                     android:text="Eliminar"
-                    android:id="@+id/button2"
+                    android:id="@+id/btnEliminarEvenEditar"
                     android:layout_gravity="center"
                     android:layout_weight="0.34"
                     android:background="#f4bfbf" />
