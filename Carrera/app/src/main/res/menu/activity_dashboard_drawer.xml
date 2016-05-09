@@ -18,6 +18,23 @@
             android:id="@+id/nav_manage"
             android:icon="@drawable/calendar"
             android:title="Eventos" />
+        <item
+            android:id="@+id/nav_CrearEventos"
+            android:icon="@drawable/calendar"
+            android:title="Eventos" />
+        <item
+            android:id="@+id/nav_EditElimEventos"
+            android:icon="@drawable/calendar"
+            android:title="Eventos" />
+        <item
+            android:id="@+id/nav_BloquearUsu"
+            android:icon="@drawable/calendar"
+            android:title="Eventos" />
+        <item
+            android:id="@+id/nav_CrearAdm"
+            android:icon="@drawable/calendar"
+            android:title="Eventos" />
+
     </group>
 
     <item android:title="Communicate">
