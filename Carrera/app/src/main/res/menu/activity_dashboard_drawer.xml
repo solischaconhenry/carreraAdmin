@@ -20,20 +20,20 @@
             android:title="Eventos" />
         <item
             android:id="@+id/nav_CrearEventos"
-            android:icon="@drawable/calendar"
-            android:title="Eventos" />
+            android:icon="@drawable/agregar"
+            android:title="Crear Eventos" />
         <item
             android:id="@+id/nav_EditElimEventos"
-            android:icon="@drawable/calendar"
-            android:title="Eventos" />
+            android:icon="@drawable/editar"
+            android:title="Editar y Eliminar Eventos" />
         <item
             android:id="@+id/nav_BloquearUsu"
-            android:icon="@drawable/calendar"
-            android:title="Eventos" />
+            android:icon="@drawable/bloquear"
+            android:title="Bloquear Usuarios" />
         <item
             android:id="@+id/nav_CrearAdm"
-            android:icon="@drawable/calendar"
-            android:title="Eventos" />
+            android:icon="@drawable/admin"
+            android:title="Crear Administradores" />
 
     </group>
 
