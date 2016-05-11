@@ -5,23 +5,19 @@
     tools:context=".activity.AgregarEventos">
 
     <!-- TODO: Update blank fragment layout -->
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="72dp">
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="71dp"
                 android:layout_marginBottom="20dp">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -32,10 +28,8 @@
                     android:layout_marginTop="30dp"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimaryDark" />
-
             </LinearLayout>
         </LinearLayout>
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -45,7 +39,6 @@
             android:layout_marginRight="2dp"
             android:background="@color/bg_Form"
             android:layout_marginBottom="2dp">
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -54,7 +47,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -62,15 +54,12 @@
                     android:text="Tipo de evento"
                     android:id="@+id/textView8"
                     android:textSize="18dp" />
-
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner3"
+                    android:id="@+id/spTEveAgreg"
                     android:layout_gravity="center_horizontal" />
-
             </LinearLayout>
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -78,7 +67,6 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -87,15 +75,13 @@
                     android:id="@+id/textView9"
                     android:layout_weight="0.74"
                     android:textSize="18dp" />
-
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText3"
+                    android:id="@+id/etNombreEveAgregar"
                     android:textIsSelectable="false"
                     android:textSize="18dp" />
             </LinearLayout>
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -103,7 +89,6 @@
                 android:layout_marginLeft="10dp"
                 android:weightSum="1"
                 android:layout_marginRight="10dp">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -111,35 +96,30 @@
                     android:text="Detalles de la evento"
                     android:id="@+id/textView3"
                     android:textSize="18dp" />
-
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="92dp"
                     android:inputType="textMultiLine"
                     android:ems="10"
-                    android:id="@+id/editText2"
+                    android:id="@+id/etDetallesEveAgreg"
                     android:textColor="@color/colorPrimaryDark"
                     android:textIsSelectable="false"
                     android:textSize="18dp" />
             </LinearLayout>
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="15dp">
-
                 <Button
                     android:layout_width="320dp"
                     android:layout_height="61dp"
                     android:text="Agregar"
-                    android:id="@+id/button"
+                    android:id="@+id/btnEvenAgreg"
                     android:layout_gravity="center"
                     android:theme="@style/AlertDialog.AppCompat"
                     android:background="@color/btn_Form" />
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
-
 </FrameLayout>

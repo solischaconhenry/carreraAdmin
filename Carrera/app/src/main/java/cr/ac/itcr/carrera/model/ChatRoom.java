@@ -6,18 +6,27 @@ import java.io.Serializable;
  * Created by Lincoln on 07/01/16.
  */
 public class ChatRoom implements Serializable {
-    String id, name, lastMessage, timestamp;
+    String id, name, lastMessage, timestamp, description;
     int unreadCount;
 
     public ChatRoom() {
     }
 
-    public ChatRoom(String id, String name, String lastMessage, String timestamp, int unreadCount) {
+    public ChatRoom(String id, String name, String lastMessage, String timestamp, int unreadCount, String description) {
         this.id = id;
         this.name = name;
+        this.description= description;
         this.lastMessage = lastMessage;
         this.timestamp = timestamp;
         this.unreadCount = unreadCount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getId() {

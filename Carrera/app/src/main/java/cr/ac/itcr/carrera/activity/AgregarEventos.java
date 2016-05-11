@@ -4,11 +4,36 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import cr.ac.itcr.carrera.R;
+import cr.ac.itcr.carrera.app.EndPoints;
+import cr.ac.itcr.carrera.app.MyApplication;
+import cr.ac.itcr.carrera.model.Message;
+import cr.ac.itcr.carrera.model.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +44,12 @@ import cr.ac.itcr.carrera.R;
  * create an instance of this fragment.
  */
 public class AgregarEventos extends Fragment {
+
+    private String TAG = MainActivity.class.getSimpleName();
+    private ArrayList<Message> messageArrayList;
+
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -65,7 +96,110 @@ public class AgregarEventos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_agregar_eventos, container, false);
+        final View view = inflater.inflate(R.layout.fragment_agregar_eventos, container, false);
+        final Spinner etTipo= (Spinner)view.findViewById(R.id.spTEveAgreg);
+        final EditText etNombre= (EditText)view.findViewById(R.id.etNombreEveAgregar);
+        final EditText etDetalles= (EditText)view.findViewById(R.id.etDetallesEveAgreg);
+
+        final Button btnAgregar = (Button)view.findViewById(R.id.btnEvenAgreg);
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User user = MyApplication.getInstance().getPrefManager().getUser();
+                if (user == null) {
+                    // TODO
+                    // user not found, redirecting him to login screen
+                    return;
+                }
+
+                final String message = etDetalles.getText().toString();
+                if (TextUtils.isEmpty(message)) {
+                    Toast.makeText(getContext(), "Enter a message", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String endPoint = EndPoints.CHAT_ROOM_MESSAGE.replace("_ID_", user.getName());
+
+                Log.e(TAG, "endpoint: " + endPoint);
+
+                etDetalles.setText("");
+
+                StringRequest strReq = new StringRequest(Request.Method.POST,
+                        endPoint, new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e(TAG, "response: " + response);
+
+                        try {
+                            JSONObject obj = new JSONObject(response);
+
+                            // check for error
+                            if (obj.getBoolean("success") == false) {
+                                JSONObject commentObj = obj.getJSONObject("Data");
+
+                                String commentId = commentObj.getString("detalle");
+                                String commentText = commentObj.getString("name");
+                                String createdAt = commentObj.getString("_id");
+
+
+                                Message message = new Message();
+                                message.setId(commentId);
+                                message.setMessage(commentText);
+                                message.setCreatedAt(createdAt);
+
+                                messageArrayList.add(message);
+
+
+                            } else {
+                                Toast.makeText(getContext(), "" + obj.getString("message"), Toast.LENGTH_LONG).show();
+                            }
+
+                        } catch (JSONException e) {
+                            Log.e(TAG, "json parsing error: " + e.getMessage());
+                            Toast.makeText(getContext(), "json parse error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        NetworkResponse networkResponse = error.networkResponse;
+                        Log.e(TAG, "Volley error: " + error.getMessage() + ", code: " + networkResponse);
+                        Toast.makeText(getContext(), "Volley error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        etDetalles.setText(message);
+                    }
+                }) {
+
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("name", etNombre.getText().toString());
+                        params.put("detalle", message);
+
+                        Log.e(TAG, "Params: " + params.toString());
+
+                        return params;
+                    };
+                };
+
+
+                // disabling retry policy so that it won't make
+                // multiple http calls
+                int socketTimeout = 0;
+                RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+                strReq.setRetryPolicy(policy);
+
+                //Adding request to request queue
+                MyApplication.getInstance().addToRequestQueue(strReq);
+            }
+
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -106,4 +240,12 @@ public class AgregarEventos extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    /**
+     * Posting a new message in chat room
+     * will make an http call to our server. Our server again sends the message
+     * to all the devices as push notification
+     * */
+
+
 }

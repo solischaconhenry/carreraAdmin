@@ -100,7 +100,7 @@ public class GcmIntentService extends IntentService {
             return;
         }
 
-        String endPoint = EndPoints.USER.replace("_ID_", user.getId());
+        String endPoint = EndPoints.USER.replace("_ID_", user.getName());
 
         Log.e(TAG, "endpoint: " + endPoint);
 
@@ -115,7 +115,7 @@ public class GcmIntentService extends IntentService {
                     JSONObject obj = new JSONObject(response);
 
                     // check for error
-                    if (obj.getBoolean("error") == false) {
+                    if (obj.getBoolean("Success") == true) {
                         // broadcasting token sent to server
                         Intent registrationComplete = new Intent(Config.SENT_TOKEN_TO_SERVER);
                         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(registrationComplete);
@@ -133,7 +133,7 @@ public class GcmIntentService extends IntentService {
             @Override
             public void onErrorResponse(VolleyError error) {
                 NetworkResponse networkResponse = error.networkResponse;
-                Log.e(TAG, "Volley error: " + error.getMessage() + ", code: " + networkResponse);
+                Log.e(TAG, "Volley errorer: " + error.getMessage() + ", code: " + networkResponse);
                 Toast.makeText(getApplicationContext(), "Volley error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }) {

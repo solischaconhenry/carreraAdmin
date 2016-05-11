@@ -3,26 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.EditarElliminarActFragment">
-
     <!-- TODO: Update blank fragment layout -->
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="1">
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -33,17 +28,14 @@
                     android:layout_marginTop="10dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold" />
-
             </LinearLayout>
         </LinearLayout>
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/bg_Form"
             android:layout_weight="0.76">
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -52,7 +44,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -60,15 +51,12 @@
                     android:text="Evento"
                     android:id="@+id/textView8"
                     android:textSize="18dp" />
-
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner2"
+                    android:id="@+id/spIDEvenEdit"
                     android:layout_gravity="center_horizontal" />
-
             </LinearLayout>
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -77,7 +65,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginRight="10dp">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -85,15 +72,12 @@
                     android:text="Tipo de evento"
                     android:id="@+id/textView10"
                     android:textSize="18dp" />
-
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner"
+                    android:id="@+id/spTEvenEditar"
                     android:layout_gravity="center_horizontal" />
-
             </LinearLayout>
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -101,7 +85,6 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -110,14 +93,12 @@
                     android:id="@+id/textView9"
                     android:layout_weight="0.74"
                     android:textSize="18dp" />
-
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText3"
+                    android:id="@+id/etNombreEvenEditar"
                     android:textSize="18dp" />
             </LinearLayout>
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -125,7 +106,6 @@
                 android:layout_marginLeft="10dp"
                 android:weightSum="1"
                 android:layout_marginRight="10dp">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -133,16 +113,14 @@
                     android:text="Detalles de la evento"
                     android:id="@+id/textView3"
                     android:textSize="18dp" />
-
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textMultiLine"
                     android:ems="10"
-                    android:id="@+id/editText2"
+                    android:id="@+id/etDetallesEvenEditar"
                     android:textSize="18dp" />
             </LinearLayout>
-
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="339dp"
@@ -152,33 +130,27 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp">
-
                 <Button
                     android:layout_width="140dp"
                     android:layout_height="55dp"
                     android:text="Editar"
-                    android:id="@+id/button"
+                    android:id="@+id/btnEditarEvenEditar"
                     android:layout_gravity="center"
                     android:layout_weight="0.39"
                     android:background="@color/btn_Form" />
-
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="5dp"
                     android:layout_height="wrap_content"></LinearLayout>
-
                 <Button
                     android:layout_width="140dp"
                     android:layout_height="55dp"
                     android:text="Eliminar"
-                    android:id="@+id/button2"
+                    android:id="@+id/btnEliminarEvenEditar"
                     android:layout_gravity="center"
                     android:layout_weight="0.34"
                     android:background="#f4bfbf" />
-
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
-
 </FrameLayout>

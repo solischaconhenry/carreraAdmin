@@ -42,6 +42,7 @@ import cr.ac.itcr.carrera.gcm.NotificationUtils;
 import cr.ac.itcr.carrera.helper.SimpleDividerItemDecoration;
 import cr.ac.itcr.carrera.model.ChatRoom;
 import cr.ac.itcr.carrera.model.Message;
+import cr.ac.itcr.carrera.model.User;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 // when chat is clicked, launch full chat thread activity
                 ChatRoom chatRoom = chatRoomArrayList.get(position);
                 Intent intent = new Intent(MainActivity.this, ChatRoomActivity.class);
-                intent.putExtra("chat_room_id", chatRoom.getId());
+                intent.putExtra("detalle", chatRoom.getDescription());
                 intent.putExtra("name", chatRoom.getName());
                 startActivity(intent);
             }
@@ -143,8 +144,8 @@ public class MainActivity extends AppCompatActivity {
         // if the push is of chat room message
         // simply update the UI unread messages count
         if (type == Config.PUSH_TYPE_CHATROOM) {
-            Message message = (Message) intent.getSerializableExtra("message");
-            String chatRoomId = intent.getStringExtra("chat_room_id");
+            Message message = (Message) intent.getSerializableExtra("detalle");
+            String chatRoomId = intent.getStringExtra("_id");
 
             if (message != null && chatRoomId != null) {
                 updateRow(chatRoomId, message);
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (type == Config.PUSH_TYPE_USER) {
             // push belongs to user alone
             // just showing the message in a toast
-            Message message = (Message) intent.getSerializableExtra("message");
+            Message message = (Message) intent.getSerializableExtra("detalle");
             Toast.makeText(getApplicationContext(), "New push: " + message.getMessage(), Toast.LENGTH_LONG).show();
         }
 
@@ -181,8 +182,11 @@ public class MainActivity extends AppCompatActivity {
      * fetching the chat rooms by making http call
      */
     private void fetchChatRooms() {
+        User user = MyApplication.getInstance().getPrefManager().getUser();
+        String endPoint = EndPoints.CHAT_ROOMS.replace("_ID_", user.getName());
+
         StringRequest strReq = new StringRequest(Request.Method.GET,
-                EndPoints.CHAT_ROOMS, new Response.Listener<String>() {
+                endPoint, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -192,16 +196,17 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject obj = new JSONObject(response);
 
                     // check for error flag
-                    if (obj.getBoolean("error") == false) {
-                        JSONArray chatRoomsArray = obj.getJSONArray("chat_rooms");
+                    if (obj.getBoolean("success") == true) {
+                        JSONArray chatRoomsArray = obj.getJSONArray("data");
                         for (int i = 0; i < chatRoomsArray.length(); i++) {
                             JSONObject chatRoomsObj = (JSONObject) chatRoomsArray.get(i);
                             ChatRoom cr = new ChatRoom();
-                            cr.setId(chatRoomsObj.getString("chat_room_id"));
+                            cr.setId(chatRoomsObj.getString("_id"));
                             cr.setName(chatRoomsObj.getString("name"));
+                            cr.setDescription(chatRoomsObj.getString("detalle"));
                             cr.setLastMessage("");
                             cr.setUnreadCount(0);
-                            cr.setTimestamp(chatRoomsObj.getString("created_at"));
+                            cr.setTimestamp("");
 
                             chatRoomArrayList.add(cr);
                         }

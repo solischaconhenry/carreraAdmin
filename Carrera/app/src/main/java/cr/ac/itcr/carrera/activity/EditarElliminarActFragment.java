@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import cr.ac.itcr.carrera.R;
 
@@ -65,7 +68,30 @@ public class EditarElliminarActFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_editar_elliminar_act, container, false);
+        // Inflate the layout for this fragment
+
+        final View view = inflater.inflate(R.layout.fragment_editar_elliminar_act, container, false);
+        final Spinner etIdE= (Spinner)view.findViewById(R.id.spIDEvenEdit);
+        final Spinner etTipoE= (Spinner)view.findViewById(R.id.spTEvenEditar);
+        final EditText etNombreE= (EditText)view.findViewById(R.id.etNombreEvenEditar);
+        final EditText etDetallesE= (EditText)view.findViewById(R.id.etDetallesEvenEditar);
+
+        final Button btnEditar = (Button)view.findViewById(R.id.btnEditarEvenEditar);
+        final Button btnEliminar = (Button)view.findViewById(R.id.btnEliminarEvenEditar);
+        btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+
+        });
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+
+        });
+
+    return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
