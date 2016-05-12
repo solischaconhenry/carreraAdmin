@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         /**
@@ -121,7 +123,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLongClick(View view, int position) {
-
+                ChatRoom chatRoom = chatRoomArrayList.get(position);
+                Intent intent = new Intent(MainActivity.this, EditarEliminarAct.class);
+                intent.putExtra("detalle", chatRoom.getDescription());
+                intent.putExtra("name", chatRoom.getName());
+                startActivity(intent);
             }
         }));
 
@@ -130,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
          * proceeding further with GCM
          * */
         if (checkPlayServices()) {
-            registerGCM();
+            //registerGCM();
             fetchChatRooms();
         }
     }

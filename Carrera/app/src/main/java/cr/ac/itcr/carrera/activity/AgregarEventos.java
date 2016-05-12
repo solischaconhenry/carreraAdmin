@@ -165,8 +165,8 @@ public class AgregarEventos extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         NetworkResponse networkResponse = error.networkResponse;
-                        Log.e(TAG, "Volley error: " + error.getMessage() + ", code: " + networkResponse);
-                        Toast.makeText(getContext(), "Volley error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "VolleyA error: " + error.getMessage() + ", code: " + networkResponse);
+                        Toast.makeText(getContext(), "VolleyA error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         etDetalles.setText(message);
                     }
                 }) {

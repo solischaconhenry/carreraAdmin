@@ -23,7 +23,6 @@ public class Dashboard extends AppCompatActivity
         AboutFragment.OnFragmentInteractionListener,
         CamaraFragment.OnFragmentInteractionListener,
         AgregarEventos.OnFragmentInteractionListener,
-        EditarElliminarActFragment.OnFragmentInteractionListener,
         BloquearUsuariosFragment.OnFragmentInteractionListener,
         CrearAdmFragment.OnFragmentInteractionListener
 
@@ -102,9 +101,7 @@ public class Dashboard extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.content_dashboard, fragment).commit();
         }
         else if (id == R.id.nav_EditElimEventos) {
-            Fragment fragment = new EditarElliminarActFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_dashboard, fragment).commit();
-
+          //se movió a un activity dependiente del onlongclick de un evento, por cuestiones de logistica
         }
         else if (id == R.id.nav_BloquearUsu) {
             Fragment fragment = new BloquearUsuariosFragment();
