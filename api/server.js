@@ -114,7 +114,7 @@ Agrega una foto o video a un evento
   */
 
 
-app.post('/api/carrera/eventos/contenido/nuevo', eventosController.nuevoContenido);
+//app.post('/api/carrera/eventos/contenido/nuevo', eventosController.nuevoContenido);  //<----------- Falta la implementación
 
 /*
 Elimina una foto o video de un evento
@@ -131,7 +131,7 @@ Elimina una foto o video de un evento
            message // éxito: 200, fracaso: 400
         }
   */
-app.delete('/api/carrera/eventos/contenido/eliminar', eventosController.eliminarContenido);
+//app.delete('/api/carrera/eventos/contenido/eliminar', eventosController.eliminarContenido);  //<----------- Falta la implementación
 
 /*
 Devuelve todas las fotos o videos de un evento
@@ -144,7 +144,7 @@ Devuelve todas las fotos o videos de un evento
            statusCode // éxito: 200, fracaso: 400
         }
   */
-app.get('/api/carrera/eventos/contenido/:idEvento/:tipoContenido', eventosController.getContenidoEvento);
+//app.get('/api/carrera/eventos/contenido/:idEvento/:tipoContenido', eventosController.getContenidoEvento);  //<----------- Falta la implementación
 
 
 /*
