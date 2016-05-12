@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#7B1FA2</color>
-    <color name="colorPrimaryDark">#6A1B9A</color>
-    <color name="colorAccent">#EA80FC</color>
+    <color name="colorPrimary">#3e8c42</color>
+    <color name="colorPrimaryDark">#479643</color>
+    <color name="colorAccent">#95e494</color>
     <color name="list_divider">#dedede</color>
-    <color name="bg_bubble_self">#E1E1E1</color>
+    <color name="bg_bubble_self">#d0e1ce</color>
+    <color name="bg_UsariosBlock">#caefc3</color>
+    <color name="bg_Form">#ecfde9</color>
+    <color name="btn_Form">#bbe4b6</color>
+
 </resources>

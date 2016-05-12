@@ -21,7 +21,13 @@ import cr.ac.itcr.carrera.R;
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         AboutFragment.OnFragmentInteractionListener,
-        CamaraFragment.OnFragmentInteractionListener{
+        CamaraFragment.OnFragmentInteractionListener,
+        AgregarEventos.OnFragmentInteractionListener,
+        EditarElliminarActFragment.OnFragmentInteractionListener,
+        BloquearUsuariosFragment.OnFragmentInteractionListener,
+        CrearAdmFragment.OnFragmentInteractionListener
+
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +36,7 @@ public class Dashboard extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -95,11 +94,29 @@ public class Dashboard extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
-            Intent i =  new Intent(getApplicationContext(),MainActivity.class);
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
-        } else if (id == R.id.nav_share) {
+        }
+        else if (id == R.id.nav_CrearEventos) {
+            Fragment fragment = new AgregarEventos();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_dashboard, fragment).commit();
+        }
+        else if (id == R.id.nav_EditElimEventos) {
+            Fragment fragment = new EditarElliminarActFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_dashboard, fragment).commit();
 
-        } else if (id == R.id.nav_send) {
+        }
+        else if (id == R.id.nav_BloquearUsu) {
+            Fragment fragment = new BloquearUsuariosFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_dashboard, fragment).commit();
+
+        }
+        else if (id == R.id.nav_CrearAdm) {
+            Fragment fragment = new CrearAdmFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_dashboard, fragment).commit();
+
+        }
+        else if (id == R.id.nav_send) {
             Fragment fragment = new AboutFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_dashboard, fragment).commit();
         }
