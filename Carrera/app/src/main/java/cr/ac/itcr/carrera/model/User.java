@@ -7,14 +7,33 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
     String id, name, email;
+    int administrador, bloqueado;
 
     public User() {
     }
 
-    public User(String id, String name, String email) {
+    public User(String id, String name, String email, int bloqueado, int administrador) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.bloqueado = bloqueado;
+        this.administrador = administrador;
+    }
+
+    public int getAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(int administrador) {
+        this.administrador = administrador;
+    }
+
+    public int getBloqueado() {
+        return bloqueado;
+    }
+
+    public void setBloqueado(int bloqueado) {
+        this.bloqueado = bloqueado;
     }
 
     public String getId() {

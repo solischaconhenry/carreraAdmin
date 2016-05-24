@@ -11,3 +11,10 @@ exports.hacerAdmin= function(uRequest, uResponse) {
         uResponse.send(data);
     });
 };
+
+
+exports.getUsuarios = function(eRequest, eResponse) {
+  usuariosService.getUsuarios(function(data){
+        eResponse.send(data);
+    });
+};

@@ -174,7 +174,16 @@ Otorga o revoca privilegios de administrador de un usuario
   */
 app.put('/api/carrera/usuarios/admin', usuariosController.hacerAdmin);
 
-
+/*
+Devuelve todos los usuarios
+  Entrada: ninguna
+  Salida: 
+        { success   // éxito: true, fracaso: false
+           data        // Array con la información de todos los usuarios
+           statusCode // éxito: 200, fracaso: 400
+        }
+  */
+app.get('/api/carrera/usuarios/todos', usuariosController.getUsuarios);
 
 
 

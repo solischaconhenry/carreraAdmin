@@ -4,11 +4,32 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import cr.ac.itcr.carrera.R;
+import cr.ac.itcr.carrera.adapter.ChatRoomsAdapter;
+import cr.ac.itcr.carrera.app.EndPoints;
+import cr.ac.itcr.carrera.app.MyApplication;
+import cr.ac.itcr.carrera.model.ChatRoom;
+import cr.ac.itcr.carrera.model.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +40,10 @@ import cr.ac.itcr.carrera.R;
  * create an instance of this fragment.
  */
 public class vistaCrearAdmFragment extends Fragment {
+
+
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,8 +89,11 @@ public class vistaCrearAdmFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_vista_crear_adm, container, false);
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_vista_crear_adm, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -106,4 +134,7 @@ public class vistaCrearAdmFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+
 }

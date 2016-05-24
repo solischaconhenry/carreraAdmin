@@ -34,6 +34,8 @@ public class  MyPreferenceManager {
     private static final String KEY_USER_NAME = "user_name";
     private static final String KEY_USER_EMAIL = "user_email";
     private static final String KEY_NOTIFICATIONS = "notifications";
+    private static final String KEY_ADMIN = "administrador";
+    private static final String KEY_BLOQ = "bloqueado";
 
     // Constructor
     public MyPreferenceManager(Context context) {
@@ -55,11 +57,14 @@ public class  MyPreferenceManager {
     public User getUser() {
         if (pref.getString(KEY_USER_ID, null) != null) {
             String id, name, email;
+            int admin, bloq;
             id = pref.getString(KEY_USER_ID, null);
             name = pref.getString(KEY_USER_NAME, null);
             email = pref.getString(KEY_USER_EMAIL, null);
+            admin =  pref.getInt(KEY_ADMIN,0);
+            bloq = pref.getInt(KEY_BLOQ,0);
 
-            User user = new User(id, name, email);
+            User user = new User(id, name, email, admin, bloq);
             return user;
         }
         return null;

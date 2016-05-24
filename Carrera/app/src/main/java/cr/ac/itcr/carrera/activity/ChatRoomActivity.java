@@ -70,6 +70,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         Intent intent = getIntent();
         description = intent.getStringExtra("detalle");
         String title = intent.getStringExtra("name");
+        String tipoevento = intent.getStringExtra("tipoevento");
 
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -82,7 +83,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         txtevento.setText(title);
         txtdetalle.setText(description);
-        txttipo.setText("Arreglar");
+        txttipo.setText(tipoevento);
 
 
         // self user id is to identify the message owner

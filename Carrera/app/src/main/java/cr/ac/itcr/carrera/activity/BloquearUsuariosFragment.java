@@ -4,11 +4,30 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import cr.ac.itcr.carrera.R;
+import cr.ac.itcr.carrera.adapter.AdapterView;
+import cr.ac.itcr.carrera.app.EndPoints;
+import cr.ac.itcr.carrera.app.MyApplication;
+import cr.ac.itcr.carrera.model.Eventos;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +38,10 @@ import cr.ac.itcr.carrera.R;
  * create an instance of this fragment.
  */
 public class BloquearUsuariosFragment extends Fragment {
+    private String TAG = BloquearUsuariosFragment.class.getSimpleName();
+    private ArrayList<Eventos> eventosArraylist;
+    private AdapterView mAdapter;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,8 +87,19 @@ public class BloquearUsuariosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bloquear_usuarios, container, false);
+
+        final View view = inflater.inflate(R.layout.fragment_bloquear_usuarios, container, false);
+
+        eventosArraylist = new ArrayList<>();
+
+        ListView listV = (ListView)view.findViewById(R.id.lvlbloquear);
+
+        fetchUsers();
+
+        mAdapter =new AdapterView(getContext(),eventosArraylist);
+        listV.setAdapter(mAdapter);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,5 +139,64 @@ public class BloquearUsuariosFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+    private void fetchUsers() {
+
+        String endPoint = EndPoints.USERS;
+
+        StringRequest strReq = new StringRequest(Request.Method.GET,
+                endPoint, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.e(TAG, "response: " + response);
+
+                try {
+                    JSONObject obj = new JSONObject(response);
+
+                    // check for error flag
+                    if (obj.getBoolean("success") == true) {
+                        JSONArray eventoArraylist = obj.getJSONArray("data");
+                        for (int i = 0; i < eventoArraylist.length(); i++) {
+                            JSONObject chatRoomsObj = (JSONObject) eventoArraylist.get(i);
+                            Eventos cr = new Eventos();
+                            cr.setId(chatRoomsObj.getString("_id"));
+                            cr.setNombre(chatRoomsObj.getString("nombre"));
+                            cr.setTipo("Bloq");
+                            Log.e(TAG,chatRoomsObj.getString("bloqueado"));
+                            if(Integer.parseInt(chatRoomsObj.getString("bloqueado")) == 1){
+
+                                cr.setAdmin(true);
+                            }else if(Integer.parseInt(chatRoomsObj.getString("bloqueado"))== 0){
+                                cr.setAdmin(false);
+                            }
+
+
+                            eventosArraylist.add(cr);
+                        }
+
+                    } else {
+                        // error in fetching chat rooms
+                        Toast.makeText(getContext(), "" + obj.getJSONObject("error").getString("message"), Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (JSONException e) {
+                    Log.e(TAG, "json parsing error: " + e.getMessage());
+                    Toast.makeText(getContext(), "Json parse error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                NetworkResponse networkResponse = error.networkResponse;
+                Log.e(TAG, "VolleyAdmin error: " + error.getMessage() + ", code: " + networkResponse);
+                Toast.makeText(getContext(), "VolleyAdmin error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Adding request to request queue
+        MyApplication.getInstance().addToRequestQueue(strReq);
     }
 }

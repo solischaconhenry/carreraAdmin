@@ -97,7 +97,7 @@ public class AgregarEventos extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_agregar_eventos, container, false);
-        final Spinner etTipo= (Spinner)view.findViewById(R.id.spTEveAgreg);
+        final EditText etTipo= (EditText)view.findViewById(R.id.spTEveAgreg);
         final EditText etNombre= (EditText)view.findViewById(R.id.etNombreEveAgregar);
         final EditText etDetalles= (EditText)view.findViewById(R.id.etDetallesEveAgreg);
 
@@ -105,68 +105,32 @@ public class AgregarEventos extends Fragment {
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = MyApplication.getInstance().getPrefManager().getUser();
-                if (user == null) {
-                    // TODO
-                    // user not found, redirecting him to login screen
-                    return;
-                }
 
-                final String message = etDetalles.getText().toString();
+
+                final String message = etDetalles.getText().toString().trim();
                 if (TextUtils.isEmpty(message)) {
                     Toast.makeText(getContext(), "Enter a message", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                String endPoint = EndPoints.CHAT_ROOM_MESSAGE.replace("_ID_", user.getName());
+                String endPoint = EndPoints.CHAT_ROOM_MESSAGE;
 
                 Log.e(TAG, "endpoint: " + endPoint);
 
-                etDetalles.setText("");
 
                 StringRequest strReq = new StringRequest(Request.Method.POST,
                         endPoint, new Response.Listener<String>() {
 
                     @Override
                     public void onResponse(String response) {
-                        Log.e(TAG, "response: " + response);
-
-                        try {
-                            JSONObject obj = new JSONObject(response);
-
-                            // check for error
-                            if (obj.getBoolean("success") == false) {
-                                JSONObject commentObj = obj.getJSONObject("Data");
-
-                                String commentId = commentObj.getString("detalle");
-                                String commentText = commentObj.getString("name");
-                                String createdAt = commentObj.getString("_id");
-
-
-                                Message message = new Message();
-                                message.setId(commentId);
-                                message.setMessage(commentText);
-                                message.setCreatedAt(createdAt);
-
-                                messageArrayList.add(message);
-
-
-                            } else {
-                                Toast.makeText(getContext(), "" + obj.getString("message"), Toast.LENGTH_LONG).show();
-                            }
-
-                        } catch (JSONException e) {
-                            Log.e(TAG, "json parsing error: " + e.getMessage());
-                            Toast.makeText(getContext(), "json parse error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         NetworkResponse networkResponse = error.networkResponse;
-                        Log.e(TAG, "VolleyA error: " + error.getMessage() + ", code: " + networkResponse);
-                        Toast.makeText(getContext(), "VolleyA error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "VolleyAdd error: " + error.getMessage() + ", code: " + networkResponse);
+                        Toast.makeText(getContext(), "VolleyAdd error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         etDetalles.setText(message);
                     }
                 }) {
@@ -174,8 +138,9 @@ public class AgregarEventos extends Fragment {
                     @Override
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<String, String>();
-                        params.put("name", etNombre.getText().toString());
-                        params.put("detalle", message);
+                        params.put("nombre", etNombre.getText().toString().trim());
+                        params.put("descripcion", message);
+                        params.put("tipoevento",etTipo.getText().toString().trim());
 
                         Log.e(TAG, "Params: " + params.toString());
 
@@ -183,15 +148,6 @@ public class AgregarEventos extends Fragment {
                     };
                 };
 
-
-                // disabling retry policy so that it won't make
-                // multiple http calls
-                int socketTimeout = 0;
-                RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
-                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-
-                strReq.setRetryPolicy(policy);
 
                 //Adding request to request queue
                 MyApplication.getInstance().addToRequestQueue(strReq);

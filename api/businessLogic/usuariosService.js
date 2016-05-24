@@ -23,3 +23,14 @@ exports.hacerAdmin = function(data, callback) {
 		callback(res);
 	});
 };
+
+exports.getUsuarios = function(callback) {
+	var params = {
+		query: {},
+		collection: 'usuarios'
+	};
+	repository.getCollection(params, function(data){
+	        callback(data);
+	});
+};
+

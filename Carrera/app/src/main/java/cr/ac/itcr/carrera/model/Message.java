@@ -6,17 +6,26 @@ import java.io.Serializable;
  * Created by Lincoln on 07/01/16.
  */
 public class Message implements Serializable {
-    String id, message, createdAt;
+    String id, message, createdAt, tipoevento;
     User user;
 
     public Message() {
     }
 
-    public Message(String id, String message, String createdAt, User user) {
+    public Message(String id, String message, String createdAt, User user, String tipoevento) {
         this.id = id;
         this.message = message;
         this.createdAt = createdAt;
         this.user = user;
+        this.tipoevento = tipoevento;
+    }
+
+    public String getTipoevento() {
+        return tipoevento;
+    }
+
+    public void setTipoevento(String tipoevento) {
+        this.tipoevento = tipoevento;
     }
 
     public String getId() {

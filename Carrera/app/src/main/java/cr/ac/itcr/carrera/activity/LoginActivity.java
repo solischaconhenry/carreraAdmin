@@ -97,7 +97,9 @@ public class LoginActivity extends AppCompatActivity {
                         User user = new User(
                                 "34",
                                 name,
-                                email
+                                email,
+                                0,
+                                0
                         );
 
                         // storing user in shared preferences

@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre "
-                    android:id="@+id/textView13"
+                    android:id="@+id/namelvl"
                     android:layout_marginLeft="7dp"
                     android:textSize="15dp" />
             </LinearLayout>
@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Id"
-                    android:id="@+id/textView14"
+                    android:id="@+id/idlvl"
                     android:layout_marginLeft="7dp"
                     android:textSize="15dp" />
             </LinearLayout>
@@ -86,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Admin"
-                android:id="@+id/switch1"
+                android:id="@+id/swlvl"
                 android:checked="false" />
         </LinearLayout>
 

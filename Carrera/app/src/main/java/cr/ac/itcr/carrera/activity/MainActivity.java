@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ChatRoomActivity.class);
                 intent.putExtra("detalle", chatRoom.getDescription());
                 intent.putExtra("name", chatRoom.getName());
+                intent.putExtra("tipoevento", chatRoom.getTipoevento());
                 startActivity(intent);
             }
 
@@ -127,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, EditarEliminarAct.class);
                 intent.putExtra("detalle", chatRoom.getDescription());
                 intent.putExtra("name", chatRoom.getName());
+                intent.putExtra("tipoevento",chatRoom.getTipoevento());
+                intent.putExtra("_id",chatRoom.getId());
                 startActivity(intent);
             }
         }));
@@ -188,8 +191,8 @@ public class MainActivity extends AppCompatActivity {
      * fetching the chat rooms by making http call
      */
     private void fetchChatRooms() {
-        User user = MyApplication.getInstance().getPrefManager().getUser();
-        String endPoint = EndPoints.CHAT_ROOMS.replace("_ID_", user.getName());
+
+        String endPoint = EndPoints.CHAT_ROOMS;
 
         StringRequest strReq = new StringRequest(Request.Method.GET,
                 endPoint, new Response.Listener<String>() {
@@ -208,8 +211,9 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject chatRoomsObj = (JSONObject) chatRoomsArray.get(i);
                             ChatRoom cr = new ChatRoom();
                             cr.setId(chatRoomsObj.getString("_id"));
-                            cr.setName(chatRoomsObj.getString("name"));
-                            cr.setDescription(chatRoomsObj.getString("detalle"));
+                            cr.setName(chatRoomsObj.getString("nombre"));
+                            cr.setDescription(chatRoomsObj.getString("descripcion"));
+                            cr.setTipoevento(chatRoomsObj.getString("tipoevento"));
                             cr.setLastMessage("");
                             cr.setUnreadCount(0);
                             cr.setTimestamp("");

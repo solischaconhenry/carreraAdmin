@@ -54,11 +54,12 @@
                     android:text="Tipo de evento"
                     android:id="@+id/textView8"
                     android:textSize="18dp" />
-                <Spinner
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/spTEveAgreg"
-                    android:layout_gravity="center_horizontal" />
+                    android:textIsSelectable="false"
+                    android:textSize="18dp" />
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
