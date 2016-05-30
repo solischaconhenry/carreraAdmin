@@ -13,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,7 +42,6 @@ import cr.ac.itcr.carrera.adapter.ChatRoomThreadAdapter;
 import cr.ac.itcr.carrera.app.Config;
 import cr.ac.itcr.carrera.app.EndPoints;
 import cr.ac.itcr.carrera.app.MyApplication;
-import cr.ac.itcr.carrera.gcm.NotificationUtils;
 import cr.ac.itcr.carrera.model.Message;
 import cr.ac.itcr.carrera.model.User;
 
@@ -59,8 +60,6 @@ public class ChatRoomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
 
         txtevento = (TextView)findViewById(R.id.shownameevent);
@@ -86,52 +85,28 @@ public class ChatRoomActivity extends AppCompatActivity {
         txttipo.setText(tipoevento);
 
 
-        // self user id is to identify the message owner
-        String selfUserId = MyApplication.getInstance().getPrefManager().getUser().getId();
-
-
-        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
-                    // new push message is received
-                    handlePushNotification(intent);
-                }
-            }
-        };
-
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_chatroom, menu);
+        return true;
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
-        // registering the receiver for new notification
-        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-                new IntentFilter(Config.PUSH_NOTIFICATION));
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_share) {
+            Intent i =  new Intent(this,shareProvider.class);
+            Bundle bolsa =  new Bundle();
+            bolsa.putString("cuerpo",txtdetalle.getText().toString());
+            bolsa.putString("asunto",txtevento.getText().toString());
+            bolsa.putString("tipo",txtdetalle.getText().toString());
+            i.putExtras(bolsa);
+            startActivity(i);
+        }
 
-        NotificationUtils.clearNotifications();
+        return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    protected void onPause() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
-        super.onPause();
-    }
-
-    /**
-     * Handling new push message, will add the message to
-     * recycler view and scroll it to bottom
-     * */
-    private void handlePushNotification(Intent intent) {
-        String message = intent.getStringExtra("detalle");
-        String types = intent.getStringExtra("tipo");
-        String eventos = intent.getStringExtra("name");
-
-        txtevento.setText(eventos);
-        txtdetalle.setText(message);
-        txttipo.setText(types);
-
-    }
-
 }

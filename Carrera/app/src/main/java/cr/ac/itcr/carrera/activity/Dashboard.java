@@ -88,32 +88,21 @@ public class Dashboard extends AppCompatActivity
         if (id == R.id.nav_camera) {
             Fragment fragment = new CamaraFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_dashboard, fragment).commit();
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        }  else if (id == R.id.nav_manage) {
+            Intent i = new Intent(getApplicationContext(), Eventos.class);
             startActivity(i);
-        }
-        else if (id == R.id.nav_CrearEventos) {
+        } else if (id == R.id.nav_CrearEventos) {
             Fragment fragment = new AgregarEventos();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_dashboard, fragment).commit();
-        }
-        else if (id == R.id.nav_EditElimEventos) {
-          //se movió a un activity dependiente del onlongclick de un evento, por cuestiones de logistica
-        }
-        else if (id == R.id.nav_BloquearUsu) {
+        } else if (id == R.id.nav_BloquearUsu) {
             Fragment fragment = new BloquearUsuariosFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_dashboard, fragment).commit();
 
-        }
-        else if (id == R.id.nav_CrearAdm) {
+        } else if (id == R.id.nav_CrearAdm) {
             Fragment fragment = new CrearAdmFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_dashboard, fragment).commit();
 
-        }
-        else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_send) {
             Fragment fragment = new AboutFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_dashboard, fragment).commit();
         }

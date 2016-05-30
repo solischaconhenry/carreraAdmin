@@ -36,6 +36,7 @@ exports.editarEvento = function(idEvento, doc, callback) {
 		updateQuery: {$set: doc},
 		collection: 'eventos'
 	};
+    console.log(doc);
 	repository.updateDocument(params, function(res) {
 		callback(res);
 	});

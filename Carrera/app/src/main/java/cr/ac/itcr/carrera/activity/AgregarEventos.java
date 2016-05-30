@@ -45,7 +45,7 @@ import cr.ac.itcr.carrera.model.User;
  */
 public class AgregarEventos extends Fragment {
 
-    private String TAG = MainActivity.class.getSimpleName();
+    private String TAG = AgregarEventos.class.getSimpleName();
     private ArrayList<Message> messageArrayList;
 
 
@@ -151,6 +151,10 @@ public class AgregarEventos extends Fragment {
 
                 //Adding request to request queue
                 MyApplication.getInstance().addToRequestQueue(strReq);
+                Toast.makeText(getContext(),"Evento creado",Toast.LENGTH_LONG).show();
+                etNombre.setText("");
+                etDetalles.setText("");
+                etTipo.setText("");
             }
 
         });

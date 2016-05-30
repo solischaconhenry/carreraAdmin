@@ -59,6 +59,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/spTEveAgreg"
                     android:textIsSelectable="false"
+                    android:inputType="textAutoCorrect"
                     android:textSize="18dp" />
             </LinearLayout>
             <LinearLayout
@@ -81,6 +82,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/etNombreEveAgregar"
                     android:textIsSelectable="false"
+                    android:inputType="textAutoCorrect"
                     android:textSize="18dp" />
             </LinearLayout>
             <LinearLayout

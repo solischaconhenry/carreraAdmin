@@ -69,11 +69,11 @@ public class EditarEliminarAct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String endPoint = EndPoints.EDITAR_EVENTO.replace(":idEvento", _id);
+                String endPoint = EndPoints.EDITAR_EVENTO.replace("idEvento", _id);
 
                 Log.e(TAG, "endpoint: " + endPoint);
 
-                StringRequest strReq = new StringRequest(Request.Method.PUT,
+                StringRequest strReq = new StringRequest(Request.Method.POST,
                         endPoint, new Response.Listener<String>() {
 
                     @Override
@@ -97,6 +97,7 @@ public class EditarEliminarAct extends AppCompatActivity {
                         params.put("descripcion", etDetallesE.getText().toString());
                         params.put("tipoevento",etTipoE.getText().toString());
 
+
                         Log.e(TAG, "params: " + params.toString());
                         return params;
                     }
@@ -112,7 +113,40 @@ public class EditarEliminarAct extends AppCompatActivity {
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String endPoint = EndPoints.DELETE_EVENTO.replace("idEvento", _id);
+
+                Log.e(TAG, "endpoint: " + endPoint);
+
+                StringRequest strReq = new StringRequest(Request.Method.DELETE,
+                        endPoint, new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        NetworkResponse networkResponse = error.networkResponse;
+                        Log.e(TAG, "VolleyLis error: " + error.getMessage() + ", code: " + networkResponse);
+                        Toast.makeText(getApplicationContext(), "VolleyLis error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+
+                    @Override
+                    protected Map<String, String> getParams() {
+                        return null;
+                    }
+                };
+
+                //Adding request to request queue
+                MyApplication.getInstance().addToRequestQueue(strReq);
+                Intent i = new Intent(getApplicationContext(),Eventos.class);
+                startActivity(i);
             }
+
+
 
         });
 

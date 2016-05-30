@@ -7,14 +7,6 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Import" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/calendar"
             android:title="Eventos" />
@@ -22,10 +14,7 @@
             android:id="@+id/nav_CrearEventos"
             android:icon="@drawable/agregar"
             android:title="Crear Eventos" />
-        <item
-            android:id="@+id/nav_EditElimEventos"
-            android:icon="@drawable/editar"
-            android:title="Editar y Eliminar Eventos" />
+
         <item
             android:id="@+id/nav_BloquearUsu"
             android:icon="@drawable/bloquear"
@@ -39,10 +28,6 @@
 
     <item android:title="Communicate">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/about"

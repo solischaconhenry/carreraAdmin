@@ -29,12 +29,13 @@
             android:layout_width="158dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:weightSum="1">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -42,7 +43,8 @@
                     android:text="Nombre:"
                     android:id="@+id/textView11"
                     android:textStyle="bold"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:layout_margin="10dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -50,29 +52,34 @@
                     android:text="Nombre "
                     android:id="@+id/namelvl"
                     android:layout_marginLeft="7dp"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:layout_width="112dp"
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
                     android:text="Id:"
                     android:id="@+id/textView12"
                     android:textStyle="normal|bold"
-                    android:textSize="15dp" />
-
+                    android:textSize="15dp"
+                    android:visibility="invisible"
+                    />
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Id"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:text="Id:"
                     android:id="@+id/idlvl"
-                    android:layout_marginLeft="7dp"
-                    android:textSize="15dp" />
+                    android:textStyle="normal|bold"
+                    android:textSize="15dp"
+                    android:visibility="invisible"
+                    />
+
             </LinearLayout>
         </LinearLayout>
 
@@ -87,7 +94,8 @@
                 android:layout_height="wrap_content"
                 android:text="Admin"
                 android:id="@+id/swlvl"
-                android:checked="false" />
+                android:checked="false"
+                android:textSize="12dp" />
         </LinearLayout>
 
     </LinearLayout>
