@@ -1,6 +1,8 @@
-bodyParser = require('body-parser');
-var eventosController = require('./controllers/eventosController.js'),
-       usuariosController = require('./controllers/usuariosController.js');
+var path = require('path'),
+    fs = require('fs'),
+    bodyParser = require('body-parser'),
+    eventosController = require('./controllers/eventosController.js'),
+    usuariosController = require('./controllers/usuariosController.js');
 
 //-------------------------------------------------------------------------
 var express       = require('express'),
@@ -61,7 +63,7 @@ Agrega un nuevo evento
   Salida: 
         { success   // éxito: true, fracaso: false
            data        // éxito: id del evento insertado, fracaso: null
-           message // éxito: 200, fracaso: 400
+           statusCode // éxito: 200, fracaso: 400
         }
   */
 app.post('/api/carrera/eventos/nuevo', eventosController.nuevoEvento);
@@ -78,7 +80,7 @@ Edita un evento
   Salida: 
         { success   // éxito: true, fracaso: false
            data        // éxito: null, fracaso: null
-           message // éxito: 200, fracaso: 400
+           statusCode // éxito: 200, fracaso: 400
         }
   */
 app.put('/api/carrera/eventos/editar/:idEvento', eventosController.editarEvento);
@@ -92,7 +94,7 @@ Elimina un evento
   Salida: 
         { success   // éxito: true, fracaso: false
            data        // éxito: null, fracaso: null
-           message // éxito: 200, fracaso: 400
+           statusCode // éxito: 200, fracaso: 400
         }
   */
 app.delete('/api/carrera/eventos/eliminar/:idEvento', eventosController.eliminarEvento);
@@ -109,12 +111,12 @@ Agrega una foto o video a un evento
         { 
            success   // éxito: true, fracaso: false
            data        // éxito: null, fracaso: null
-           message // éxito: 200, fracaso: 400
+           statusCode // éxito: 200, fracaso: 400
         }
   */
 
 
-//app.post('/api/carrera/eventos/contenido/nuevo', eventosController.nuevoContenido);  //<----------- Falta la implementación
+app.post('/api/carrera/eventos/contenido/nuevo', eventosController.nuevoContenido);
 
 /*
 Elimina una foto o video de un evento
@@ -128,10 +130,10 @@ Elimina una foto o video de un evento
         { 
            success   // éxito: true, fracaso: false
            data        // éxito: null, fracaso: null
-           message // éxito: 200, fracaso: 400
+           statusCode // éxito: 200, fracaso: 400
         }
   */
-//app.delete('/api/carrera/eventos/contenido/eliminar', eventosController.eliminarContenido);  //<----------- Falta la implementación
+app.delete('/api/carrera/eventos/contenido/eliminar', eventosController.eliminarContenido);
 
 /*
 Devuelve todas las fotos o videos de un evento
@@ -144,7 +146,7 @@ Devuelve todas las fotos o videos de un evento
            statusCode // éxito: 200, fracaso: 400
         }
   */
-//app.get('/api/carrera/eventos/contenido/:idEvento/:tipoContenido', eventosController.getContenidoEvento);  //<----------- Falta la implementación
+app.get('/api/carrera/eventos/contenido/:idEvento/:tipoContenido', eventosController.getContenidoEvento);
 
 
 /*
@@ -185,9 +187,6 @@ Devuelve todos los usuarios
   */
 app.get('/api/carrera/usuarios/todos', usuariosController.getUsuarios);
 
-
-
- 
 
 server.listen(port, function(){
   console.log('Server listening on port: ' + port);

@@ -37,13 +37,21 @@ exports.nuevoContenido = function(eRequest, eResponse) {
 };
 
 exports.eliminarContenido = function(eRequest, eResponse) {
-  eventosService.eliminarContenido(eRequest.params, function(data){
+  eventosService.eliminarContenido(eRequest.body, function(data){
         eResponse.send(data);
     });
 };
 
 exports.getContenidoEvento = function(eRequest, eResponse) {
   eventosService.getContenidoEvento(eRequest.params, function(data){
-        eResponse.send(data);
+
+      res.sendFile(path.resolve(data.path), null, function(err){
+          res.send(
+              {
+                  success: false,
+                  data: null,
+                  statusCode: 400
+          });
+      });
     });
 };
