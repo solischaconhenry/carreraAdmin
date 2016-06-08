@@ -66,9 +66,11 @@
         <activity
             android:name=".activity.Eventos"
             android:parentActivityName=".activity.Dashboard"/>
-        <activity android:name=".activity.shareProvider"></activity>
+        <activity android:name=".activity.shareProvider"/>
         <activity android:name=".activity.ChatRoomActivity"
-            android:parentActivityName=".activity.Eventos"></activity>
+            android:parentActivityName=".activity.Eventos"/>
+        <activity android:name=".activity.AgregarEventos"
+            android:parentActivityName=".activity.Dashboard"/>
     </application>
 
 </manifest>

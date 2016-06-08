@@ -51,16 +51,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Tipo de evento"
+                    android:text="@string/tipo_de_evento"
                     android:id="@+id/textView8"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/spTEveAgreg"
                     android:textIsSelectable="false"
                     android:inputType="textAutoCorrect"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -71,19 +71,19 @@
                 android:layout_marginRight="10dp">
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Nombre de la evento"
+                    android:text="@string/nombre_del_evento"
                     android:id="@+id/textView9"
                     android:layout_weight="0.74"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/etNombreEveAgregar"
                     android:textIsSelectable="false"
                     android:inputType="textAutoCorrect"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -96,9 +96,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Detalles de la evento"
+                    android:text="@string/detalles_del_evento"
                     android:id="@+id/textView3"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="92dp"
@@ -107,21 +107,42 @@
                     android:id="@+id/etDetallesEveAgreg"
                     android:textColor="@color/colorPrimaryDark"
                     android:textIsSelectable="false"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
             </LinearLayout>
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="15dp">
-                <Button
-                    android:layout_width="320dp"
-                    android:layout_height="61dp"
-                    android:text="Agregar"
-                    android:id="@+id/btnEvenAgreg"
-                    android:layout_gravity="center"
-                    android:theme="@style/AlertDialog.AppCompat"
-                    android:background="@color/btn_Form" />
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="25dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imgVPhoto"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/image_add"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="30dp">
+                    <Button
+                        android:layout_width="130dp"
+                        android:layout_height="61dp"
+                        android:text="@string/agregar"
+                        android:id="@+id/btnEvenAgreg"
+                        android:layout_gravity="center"
+                        android:theme="@style/AlertDialog.AppCompat"
+                        android:background="@color/btn_Form" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

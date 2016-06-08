@@ -22,7 +22,6 @@ public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         AboutFragment.OnFragmentInteractionListener,
         CamaraFragment.OnFragmentInteractionListener,
-        AgregarEventos.OnFragmentInteractionListener,
         BloquearUsuariosFragment.OnFragmentInteractionListener,
         CrearAdmFragment.OnFragmentInteractionListener
 
@@ -92,8 +91,8 @@ public class Dashboard extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), Eventos.class);
             startActivity(i);
         } else if (id == R.id.nav_CrearEventos) {
-            Fragment fragment = new AgregarEventos();
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_dashboard, fragment).commit();
+            Intent a = new Intent(getApplicationContext(),AgregarEventos.class);
+            startActivity(a);
         } else if (id == R.id.nav_BloquearUsu) {
             Fragment fragment = new BloquearUsuariosFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_dashboard, fragment).commit();

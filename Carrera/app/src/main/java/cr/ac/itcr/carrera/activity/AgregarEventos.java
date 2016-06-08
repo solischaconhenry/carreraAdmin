@@ -1,19 +1,30 @@
 package cr.ac.itcr.carrera.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -25,8 +36,11 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 import cr.ac.itcr.carrera.R;
@@ -35,73 +49,32 @@ import cr.ac.itcr.carrera.app.MyApplication;
 import cr.ac.itcr.carrera.model.Message;
 import cr.ac.itcr.carrera.model.User;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AgregarEventos.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AgregarEventos#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class AgregarEventos extends Fragment {
+
+public class AgregarEventos extends AppCompatActivity {
 
     private String TAG = AgregarEventos.class.getSimpleName();
     private ArrayList<Message> messageArrayList;
+    public ImageView imgVPhoto;
+    private Bitmap bitmap;
+    private int PICK_IMAGE_REQUEST = 1;
+    private Button btnAgregar;
+
+    private EditText etTipo,etNombre,etDetalles;
 
 
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
-    public AgregarEventos() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AgregarEventos.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AgregarEventos newInstance(String param1, String param2) {
-        AgregarEventos fragment = new AgregarEventos();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+        setContentView(R.layout.fragment_agregar_eventos);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_agregar_eventos, container, false);
-        final EditText etTipo= (EditText)view.findViewById(R.id.spTEveAgreg);
-        final EditText etNombre= (EditText)view.findViewById(R.id.etNombreEveAgregar);
-        final EditText etDetalles= (EditText)view.findViewById(R.id.etDetallesEveAgreg);
+        etTipo= (EditText)findViewById(R.id.spTEveAgreg);
+        etNombre= (EditText)findViewById(R.id.etNombreEveAgregar);
+        etDetalles= (EditText)findViewById(R.id.etDetallesEveAgreg);
+        imgVPhoto = (ImageView)findViewById(R.id.imgVPhoto);
 
-        final Button btnAgregar = (Button)view.findViewById(R.id.btnEvenAgreg);
+        btnAgregar = (Button)findViewById(R.id.btnEvenAgreg);
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +82,7 @@ public class AgregarEventos extends Fragment {
 
                 final String message = etDetalles.getText().toString().trim();
                 if (TextUtils.isEmpty(message)) {
-                    Toast.makeText(getContext(), "Enter a message", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Enter a message", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -130,8 +103,8 @@ public class AgregarEventos extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         NetworkResponse networkResponse = error.networkResponse;
                         Log.e(TAG, "VolleyAdd error: " + error.getMessage() + ", code: " + networkResponse);
-                        Toast.makeText(getContext(), "VolleyAdd error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        etDetalles.setText(message);
+                        Toast.makeText(getApplicationContext(), "VolleyAdd error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 }) {
 
@@ -151,54 +124,20 @@ public class AgregarEventos extends Fragment {
 
                 //Adding request to request queue
                 MyApplication.getInstance().addToRequestQueue(strReq);
-                Toast.makeText(getContext(),"Evento creado",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Evento creado",Toast.LENGTH_LONG).show();
                 etNombre.setText("");
                 etDetalles.setText("");
                 etTipo.setText("");
             }
+           // uploadImage();
 
         });
-
-        return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_add_event, menu);
+        return true;
     }
 
     /**
@@ -207,5 +146,104 @@ public class AgregarEventos extends Fragment {
      * to all the devices as push notification
      * */
 
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.btnCamara:
+                showFileChooser();
+                return true;
+            case R.id.btnVideo:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+
+    public void showFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        int RESULT_OK = 200;
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri filePath = data.getData();
+            try {
+                //Getting the Bitmap from Gallery
+                bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), filePath);
+                //Setting the Bitmap to ImageView
+                imgVPhoto.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+    public void uploadImage(){
+        //Showing the progress dialog
+        String endPointimg = EndPoints.UPLOAD_IMAGE;
+        final ProgressDialog loading = ProgressDialog.show(this,"Uploading...","Please wait...",false,false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, endPointimg,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        //Disimissing the progress dialog
+                        loading.dismiss();
+                        //Showing toast message of the response
+                        Toast.makeText(getApplicationContext(), s , Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        //Dismissing the progress dialog
+                        loading.dismiss();
+
+                        //Showing toast
+                        Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //Converting Bitmap to String
+                String image = getStringImage(bitmap);
+
+                //Getting Image Name
+                String name = etNombre.getText().toString().trim();
+
+                //Creating parameters
+                Map<String,String> params = new Hashtable<String, String>();
+
+                //Adding parameters
+                params.put("idEvento", etNombre.getText().toString().trim());
+                params.put("tipoContenido", "0");
+                params.put("contenido", image);
+
+                //returning parameters
+                return params;
+            }
+        };
+
+        //Creating a Request Queue
+        MyApplication.getInstance().addToRequestQueue(stringRequest);
+
+    }
 
 }
